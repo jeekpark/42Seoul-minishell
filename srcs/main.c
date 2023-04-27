@@ -6,11 +6,32 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/04/26 18:49:12 by tnam             ###   ########.fr       */
+/*   Updated: 2023/04/27 20:10:36 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* print test function */
+void	print_tokens(t_parse *parse)
+{
+	char	*type;
+
+	printf("\n=========\n");
+	for (size_t i = 0; i < parse->token_count; i++)
+	{
+		if (parse->tokens[i].type == WORD)
+			type = "WORD";
+		if (parse->tokens[i].type == PIPE)
+			type = "PIPE";
+		if (parse->tokens[i].type == REDIRECT)
+			type = "REDIRECT";
+		printf("Token%zu type = %s\n", i + 1, type);
+		printf("Token%zu str = %s\n", i + 1, parse->tokens[i].str);
+		printf("---------\n");
+	}
+	printf("=========\n\n");
+}
 
 static void	ft_parse_execute(t_minishell *mini, t_info *info, t_parse *parse)
 {
@@ -18,6 +39,8 @@ static void	ft_parse_execute(t_minishell *mini, t_info *info, t_parse *parse)
 		return ;
 	/* if (ft_execute(mini, info, parse) == FAILURE)
 		return ; */
+	print_tokens(parse); // test
+	ft_free_tokens(parse);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -41,7 +64,6 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		add_history(parse.line);
 		ft_parse_execute(&mini, &info, &parse);
-		printf("token count : %zu\n", parse.token_count); //test
 		free(parse.line);
 	}
 	return (EXIT_SUCCESS);
