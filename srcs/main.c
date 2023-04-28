@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/04/27 20:10:36 by tnam             ###   ########.fr       */
+/*   Updated: 2023/04/28 19:21:34 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ static void	ft_parse_execute(t_minishell *mini, t_info *info, t_parse *parse)
 	ft_free_tokens(parse);
 }
 
+void leaks() // memory leak test
+{
+	system("leaks -q $PPID");
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	mini;
 	t_info		info;
 	t_parse		parse;
 
+	atexit(leaks); // memory leaks test
 	mini.info = &info;
 	mini.parse = &parse;
 	ft_init(argc, argv, envp, &mini);
@@ -57,6 +63,7 @@ int	main(int argc, char *argv[], char *envp[])
 		parse.line = readline("whine 🍷 ");
 		if (parse.line == NULL)
 		{
+			ft_list_clear(&info.mini_envp);
 			ft_putstr_fd("\x1b[1A", STDOUT_FILENO);
 			ft_putstr_fd("\033[9C", STDOUT_FILENO);
 			printf("exit\n");

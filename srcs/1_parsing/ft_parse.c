@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:25:50 by tnam              #+#    #+#             */
-/*   Updated: 2023/04/27 20:18:37 by tnam             ###   ########.fr       */
+/*   Updated: 2023/04/28 20:02:00 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_parse_init(t_parse *parse)
 	parse->token_count = 0;
 	parse->tokens_i = 0;
 	parse->start_i = 0;
+	parse->str_i = 0;
+	parse->squote_flag = FALSE;
 }
 
 static int	ft_ready_tokenization(t_parse *parse)
@@ -43,7 +45,11 @@ int	ft_parse(t_minishell *mini, t_info *info, t_parse *parse)
 		ft_free_tokens(parse);
 		return (FAILURE);
 	}
+	if (ft_convert_env(info, parse) == FAILURE)
+	{
+		ft_free_tokens(parse);
+		return (FAILURE);
+	}
 	(void)mini; // dummy
-	(void)info; // dummy
 	return (SUCCESS);
 }

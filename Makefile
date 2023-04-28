@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/04/27 20:20:27 by tnam             ###   ########.fr        #
+#    Updated: 2023/04/28 19:20:17 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS			=	srcs/main.c							\
 					srcs/utils/ft_is_operator.c			\
 					srcs/utils/ft_is_redirect.c			\
 					srcs/utils/ft_is_quote.c			\
+					srcs/utils/ft_is_env.c				\
 					srcs/utils/ft_free_tokens.c			\
 					srcs/ft_list/ft_list_del_node.c		\
 					srcs/ft_list/ft_list_init.c			\
@@ -40,6 +41,7 @@ SRCS			=	srcs/main.c							\
 					srcs/1_parsing/ft_count_token.c		\
 					srcs/1_parsing/ft_tokenization.c	\
 					srcs/1_parsing/ft_make_token.c		\
+					srcs/1_parsing/ft_convert_env.c		\
 					
 					
 OBJS			=	$(SRCS:.c=.o)
