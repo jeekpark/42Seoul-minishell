@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:25:50 by tnam              #+#    #+#             */
-/*   Updated: 2023/04/28 20:02:00 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/02 14:02:29 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_parse(t_minishell *mini, t_info *info, t_parse *parse)
 		ft_free_tokens(parse);
 		return (FAILURE);
 	}
+	ft_remove_quote(parse);
 	(void)mini; // dummy
 	return (SUCCESS);
 }

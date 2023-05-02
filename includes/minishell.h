@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/04/28 20:05:10 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/02 14:01:59 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int		ft_count_token(t_parse *parse);
 int		ft_tokenization(t_parse *parse);
 int		ft_make_token(t_parse *parse, t_token_type type);
 int		ft_convert_env(t_info *info, t_parse *parse);
+void	ft_remove_quote(t_parse *parse);
 
 /* ft_list */
 t_list	ft_list_init(void);
