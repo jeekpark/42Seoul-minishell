@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/02 14:01:59 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/02 14:25:18 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_parse
 	size_t			start_i;
 	size_t			str_i;
 	int				squote_flag;
+	int				dquote_flag;
 	char			*target_env;
 	char			*env_val;
 	size_t			env_val_len;
