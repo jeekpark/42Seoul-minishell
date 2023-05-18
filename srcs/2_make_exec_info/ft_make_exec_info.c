@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 14:24:48 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 17:56:36 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/18 18:09:01 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	ft_set_exec_info(t_parse *parse, t_exec *exec,
 	}
 	return (SUCCESS);
 }
-
 
 static int	ft_add_exec_info(t_parse *parse, t_exec *exec)
 {
