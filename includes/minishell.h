@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 11:42:23 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/18 14:22:24 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,8 @@ typedef struct s_parse
 	char			*new_str;
 }	t_parse;
 
-typedef struct s_minishell
-{
-	t_info	*info;
-	t_parse	*parse;
-}	t_minishell;
-
 /* 0_init */
-void	ft_init(int argc, char **argv, char **envp, t_minishell *mini);
+void	ft_init(int argc, char **argv, char **envp, t_info *info);
 void	ft_sig_init(void);
 void	ft_mini_envp_init(char **envp, t_info *info);
 
@@ -110,6 +104,8 @@ int		ft_make_token(t_parse *parse, t_token_type type);
 int		ft_convert_env(t_info *info, t_parse *parse);
 void	ft_remove_quote(t_parse *parse);
 int		ft_syntax_check(t_parse *parse);
+
+/* 2_make_exec_info */
 
 /* ft_list */
 t_list	ft_list_init(void);

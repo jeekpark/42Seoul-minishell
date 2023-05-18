@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 11:43:17 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/18 14:23:52 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,10 @@ void	print_tokens(t_parse *parse)
 	printf("=========\n\n");
 }
 
-static void	ft_parse_execute(t_minishell *mini, t_info *info, t_parse *parse)
+static void	ft_parse_execute(t_info *info, t_parse *parse)
 {
-	(void)mini; // dummy
 	if (ft_parse(info, parse) == FAILURE)
 		return ;
-	/* if (ft_execute(info, parse) == FAILURE)
-		return ; */
 	print_tokens(parse); // test
 	ft_free_tokens(parse, parse->token_count);
 }
@@ -51,14 +48,11 @@ void leaks() // memory leak test
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_minishell	mini;
 	t_info		info;
 	t_parse		parse;
 
 	atexit(leaks); // memory leaks test
-	mini.info = &info;
-	mini.parse = &parse;
-	ft_init(argc, argv, envp, &mini);
+	ft_init(argc, argv, envp, &info);
 	while (TRUE)
 	{
 		parse.line = readline("whine 🍷 ");
@@ -71,7 +65,7 @@ int	main(int argc, char *argv[], char *envp[])
 			return (EXIT_SUCCESS);
 		}
 		add_history(parse.line);
-		ft_parse_execute(&mini, &info, &parse);
+		ft_parse_execute(&info, &parse);
 		free(parse.line);
 	}
 	return (EXIT_SUCCESS);
