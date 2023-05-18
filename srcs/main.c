@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 14:23:52 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/18 15:11:43 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ void	print_tokens(t_parse *parse)
 	printf("=========\n\n");
 }
 
-static void	ft_parse_execute(t_info *info, t_parse *parse)
+static void	ft_parse_execute(t_info *info, t_parse *parse, t_exec *exec)
 {
 	if (ft_parse(info, parse) == FAILURE)
 		return ;
+	if (ft_make_exec_info(parse, exec) == FAILURE)
+		return ;
 	print_tokens(parse); // test
 	ft_free_tokens(parse, parse->token_count);
+	ft_free_exec(exec, exec->exec_arr_size);
 }
 
 void leaks() // memory leak test
@@ -50,6 +53,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_info		info;
 	t_parse		parse;
+	t_exec		exec;
 
 	atexit(leaks); // memory leaks test
 	ft_init(argc, argv, envp, &info);
@@ -65,7 +69,7 @@ int	main(int argc, char *argv[], char *envp[])
 			return (EXIT_SUCCESS);
 		}
 		add_history(parse.line);
-		ft_parse_execute(&info, &parse);
+		ft_parse_execute(&info, &parse, &exec);
 		free(parse.line);
 	}
 	return (EXIT_SUCCESS);

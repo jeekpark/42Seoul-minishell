@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 14:22:24 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/18 16:58:29 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,35 @@ typedef struct s_parse
 	char			*new_str;
 }	t_parse;
 
+typedef enum e_redirect_type
+{
+	OUT1,
+	OUT2,
+	IN1,
+	HERE_DOC,
+}	t_redirect_type;
+
+typedef struct s_redirect
+{
+	t_redirect_type		type;
+	char				*word;
+	struct s_redirect	*next;
+}	t_redirect;
+
+typedef struct s_exec_info
+{
+	char			*cmd_path;
+	char			**cmd;
+	t_redirect		*redirect;
+	int				*use_pipe;
+}	t_exec_info;
+
+typedef struct s_exec
+{
+	t_exec_info	*exec_arr;
+	size_t		exec_arr_size;
+}	t_exec;
+
 /* 0_init */
 void	ft_init(int argc, char **argv, char **envp, t_info *info);
 void	ft_sig_init(void);
@@ -106,6 +135,7 @@ void	ft_remove_quote(t_parse *parse);
 int		ft_syntax_check(t_parse *parse);
 
 /* 2_make_exec_info */
+int		ft_make_exec_info(t_parse *parse, t_exec *exec);
 
 /* ft_list */
 t_list	ft_list_init(void);
@@ -122,5 +152,6 @@ int		ft_is_quote(char c);
 int		ft_is_env(t_info *info, t_parse *parse);
 int		ft_is_heredoc(char c1, char c2);
 void	ft_free_tokens(t_parse *parse, size_t token_size);
+void	ft_free_exec(t_exec *exec, size_t exec_size);
 
 #endif
