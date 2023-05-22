@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 14:24:48 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 18:09:01 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/22 14:03:04 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,14 @@ static void	ft_get_exec_arr_size(t_parse *parse, t_exec *exec)
 	}
 }
 
-static int	ft_init_exec_info(t_exec_info *exec_info)
+static void	ft_init_exec_info(t_exec_info *exec_info)
 {
 	exec_info->cmd_path = NULL;
 	exec_info->cmd = NULL;
+	exec_info->cmd_i = 0;
 	exec_info->redirect = NULL;
+	exec_info->redirect_i = 0;
 	exec_info->use_pipe = FALSE;
-}
-
-static int	ft_set_exec_info(t_parse *parse, t_exec *exec,
-	t_exec_info *exec_info)
-{
-	// PIPE가 나오기 전까지 총 WORD의 개수 만큼 **cmd 동적할당.
-	parse->tokens_i = 0;
-	while (parse->tokens_i < parse->token_count)
-	{
-		if (parse->tokens[parse->tokens_i].type == PIPE)
-		{
-			exec_info->use_pipe = TRUE;
-			break ;
-		}
-		// WORD인 경우, REDIRECT인 경우 로직 추가.
-		// **cmd의 각 인덱스 값 = 해당 WORD 토큰의 str 주소.
-		// redirect의 word 값 = 해당 WORD 토큰의 str 주소.
-		// redirect의 next 값 = 생성된 redirect의 주소.
-		parse->tokens_i++;
-	}
-	return (SUCCESS);
 }
 
 static int	ft_add_exec_info(t_parse *parse, t_exec *exec)
@@ -60,14 +41,15 @@ static int	ft_add_exec_info(t_parse *parse, t_exec *exec)
 	t_exec_info	*exec_info;
 	size_t		exec_arr_i;
 
+	parse->tokens_i = 0;
 	exec_arr_i = 0;
 	while (exec_arr_i < exec->exec_arr_size)
 	{
 		exec_info = &exec->exec_arr[exec_arr_i];
 		ft_init_exec_info(exec_info);
-		if (ft_set_exec_info(parse, exec, exec_info) == FAILURE)
+		if (ft_set_exec_info(parse, exec_info) == FAILURE)
 		{
-			ft_free_exec(exec, exec_arr_i);
+			ft_free_exec(exec->exec_arr, exec_arr_i);
 			return (FAILURE);
 		}
 		exec_arr_i++;

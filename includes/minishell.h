@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/18 16:58:29 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/22 14:01:31 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,17 @@ typedef enum e_redirect_type
 typedef struct s_redirect
 {
 	t_redirect_type		type;
-	char				*word;
-	struct s_redirect	*next;
+	char				*value;
 }	t_redirect;
 
 typedef struct s_exec_info
 {
 	char			*cmd_path;
 	char			**cmd;
+	size_t			cmd_i;
 	t_redirect		*redirect;
-	int				*use_pipe;
+	size_t			redirect_i;
+	int				use_pipe;
 }	t_exec_info;
 
 typedef struct s_exec
@@ -136,6 +137,7 @@ int		ft_syntax_check(t_parse *parse);
 
 /* 2_make_exec_info */
 int		ft_make_exec_info(t_parse *parse, t_exec *exec);
+int		ft_set_exec_info(t_parse *parse, t_exec_info *exec_info);
 
 /* ft_list */
 t_list	ft_list_init(void);
@@ -152,6 +154,6 @@ int		ft_is_quote(char c);
 int		ft_is_env(t_info *info, t_parse *parse);
 int		ft_is_heredoc(char c1, char c2);
 void	ft_free_tokens(t_parse *parse, size_t token_size);
-void	ft_free_exec(t_exec *exec, size_t exec_size);
+void	ft_free_exec(t_exec_info *exec_arr, size_t exec_info_size);
 
 #endif
