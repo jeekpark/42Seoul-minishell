@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/22 14:11:20 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/22 14:32:41 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,13 @@ int	main(int argc, char *argv[], char *envp[])
 		if (parse.line == NULL)
 		{
 			ft_list_clear(&info.mini_envp);
-			ft_putstr_fd("\x1b[1A", STDOUT_FILENO);
-			ft_putstr_fd("\033[9C", STDOUT_FILENO);
-			printf("exit\n");
+			ft_putstr_fd("\x1b[1A\033[9Cexit\n", STDOUT_FILENO);
 			return (EXIT_SUCCESS);
+		}
+		if (parse.line[0] == '\0')
+		{
+			free(parse.line);
+			continue ;
 		}
 		add_history(parse.line);
 		ft_parse_execute(&info, &parse, &exec);
