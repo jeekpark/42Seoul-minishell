@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/05/23 17:24:24 by tnam             ###   ########.fr        #
+#    Updated: 2023/05/23 18:43:55 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS			=	srcs/main.c							\
 					srcs/utils/ft_is_env.c				\
 					srcs/utils/ft_is_heredoc.c			\
 					srcs/utils/ft_is_child_exit_code.c	\
+					srcs/utils/ft_is_builtin.c			\
 					srcs/utils/ft_free_tokens.c			\
 					srcs/utils/ft_free_exec.c			\
 					srcs/utils/ft_free_all.c			\
@@ -56,9 +57,17 @@ SRCS			=	srcs/main.c							\
 					srcs/2_make_exec_info/ft_set_exec_info.c	\
 					srcs/3_exec/ft_exec.c				\
 					srcs/3_exec/ft_exec_cmd.c			\
+					srcs/3_exec/ft_exec_builtin.c		\
 					srcs/3_exec/ft_redirect.c			\
 					srcs/3_exec/ft_redirect_here_doc.c	\
 					srcs/3_exec/ft_pipe.c				\
+					srcs/4_builtin/ft_echo_builtin.c	\
+					srcs/4_builtin/ft_cd_builtin.c		\
+					srcs/4_builtin/ft_env_builtin.c		\
+					srcs/4_builtin/ft_exit_builtin.c	\
+					srcs/4_builtin/ft_export_builtin.c	\
+					srcs/4_builtin/ft_pwd_builtin.c		\
+					srcs/4_builtin/ft_unset_builtin.c	\
 					
 OBJS			=	$(SRCS:.c=.o)
 
