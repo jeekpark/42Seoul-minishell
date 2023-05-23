@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/23 18:42:37 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 19:47:21 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define NONE -1
 
 /* Global Variable */
-extern unsigned char	g_child_exit_code;
+extern int	g_child_exit_code;
 
 /* List */
 typedef struct s_node
