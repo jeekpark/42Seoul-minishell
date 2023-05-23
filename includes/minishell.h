@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/23 17:04:42 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 18:02:01 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_parse
 	size_t			env_val_len;
 	char			*old_str;
 	char			*new_str;
+	char			*exit_code;
 }	t_parse;
 
 typedef enum e_redirect_type
@@ -148,6 +149,7 @@ int		ft_count_token(t_parse *parse);
 int		ft_tokenization(t_parse *parse);
 int		ft_make_token(t_parse *parse, t_token_type type);
 int		ft_convert_env(t_info *info, t_parse *parse);
+int		ft_convert_child_exit_code(t_parse *parse);
 void	ft_remove_quote(t_parse *parse);
 int		ft_syntax_check(t_parse *parse);
 
@@ -179,6 +181,7 @@ int		ft_is_redirect(char c);
 int		ft_is_quote(char c);
 int		ft_is_env(t_info *info, t_parse *parse);
 int		ft_is_heredoc(char c1, char c2);
+int		ft_is_child_exit_code(t_parse *parse);
 void	ft_free_tokens(t_parse *parse, size_t token_size);
 void	ft_free_exec(t_exec *exec, size_t exec_info_size);
 void	ft_free_all(t_parse *parse, t_exec *exec);
