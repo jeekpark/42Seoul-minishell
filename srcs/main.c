@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/22 23:02:27 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 15:03:48 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	ft_parse_execute(t_info *info, t_parse *parse, t_exec *exec)
 	if (ft_exec(info, parse, exec) == FAILURE)
 		return ;
 	//print_tokens(parse); // test
-	print_exec(exec); // test
+	//print_exec(exec); // test
 	ft_free_all(parse, exec);
 }
 
@@ -88,7 +88,7 @@ int	main(int argc, char *argv[], char *envp[])
 		parse.line = readline("whine 🍷 ");
 		if (parse.line == NULL)
 		{
-			//ft_list_clear(&info.mini_envp);
+			ft_list_clear(&info.mini_envp);
 			ft_putstr_fd("\x1b[1A\033[9Cexit\n", STDOUT_FILENO);
 			return (EXIT_SUCCESS);
 		}

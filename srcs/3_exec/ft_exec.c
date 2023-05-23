@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:21:28 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/22 22:03:16 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 14:57:52 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 static int	ft_parent(t_exec *exec, t_exec_info *exec_info)
 {
-	if (close(exec_info->pipe_fd[OUT]) == FAILURE)
-		return (ft_perror(FAILURE));
 	if (exec->prev_pipe_fd != NONE)
 	{
 		if (close(exec->prev_pipe_fd) == FAILURE)
 			return (ft_perror(FAILURE));
 	}
 	if (exec_info->use_pipe == TRUE)
+	{
+		if (close(exec_info->pipe_fd[OUT]) == FAILURE)
+			return (ft_perror(FAILURE));
 		exec->prev_pipe_fd = exec_info->pipe_fd[IN];
+	}
+	else
+		exec->prev_pipe_fd = NONE;
 	return (SUCCESS);
 }
 
@@ -57,9 +61,10 @@ static int	ft_wait_child(t_exec *exec)
 	{
 		if (waitpid(-1, &child_status, 0) == FAILURE)
 			return (ft_perror(FAILURE));
-		exec->child_exit_code = WEXITSTATUS(child_status);
 		exec->exec_arr_i++;
 	}
+	exec->child_exit_code = WEXITSTATUS(child_status);
+	unlink("/tmp/whine");
 	return (SUCCESS);
 }
 

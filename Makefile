@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/05/22 22:39:39 by tnam             ###   ########.fr        #
+#    Updated: 2023/05/23 13:59:25 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRCS			=	srcs/main.c							\
 					srcs/ft_list/ft_list_init.c			\
 					srcs/ft_list/ft_list_push_back.c	\
 					srcs/ft_list/ft_list_clear.c		\
+					srcs/gnl/get_next_line.c			\
+					srcs/gnl/get_next_line_utils.c		\
 					srcs/0_init/ft_init.c				\
 					srcs/0_init/ft_sig_init.c			\
 					srcs/0_init/ft_mini_envp_init.c		\
@@ -52,7 +54,9 @@ SRCS			=	srcs/main.c							\
 					srcs/2_make_exec_info/ft_set_exec_info.c	\
 					srcs/3_exec/ft_exec.c				\
 					srcs/3_exec/ft_exec_cmd.c			\
-					
+					srcs/3_exec/ft_redirect.c			\
+					srcs/3_exec/ft_redirect_here_doc.c	\
+					srcs/3_exec/ft_pipe.c				\
 					
 OBJS			=	$(SRCS:.c=.o)
 

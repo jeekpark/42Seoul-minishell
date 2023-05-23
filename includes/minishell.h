@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/22 22:02:54 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 14:42:19 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <termios.h>
 # include <errno.h>
 # include "libft.h"
+# include "get_next_line.h"
 
 # define TRUE 1
 # define FALSE 0
@@ -129,8 +130,8 @@ typedef struct s_exec
 	t_exec_info	*exec_arr;
 	size_t		exec_arr_size;
 	size_t		exec_arr_i;
-	int			prev_pipe_fd;
 	int			child_exit_code;
+	int			prev_pipe_fd;
 	char		**path_envp;
 }	t_exec;
 
@@ -156,6 +157,9 @@ int		ft_set_exec_info(t_parse *parse, t_exec_info *exec_info);
 int		ft_exec(t_info *info, t_parse *parse, t_exec *exec);
 void	ft_exec_cmd(t_info *info, t_parse *parse,
 			t_exec *exec, t_exec_info *exec_info);
+void	ft_redirect(t_exec_info *exec_info);
+void	ft_redirect_here_doc(t_exec_info *exec_info, t_redirect *redirect);
+void	ft_pipe(t_exec *exec, t_exec_info *exec_info);
 
 /* ft_list */
 t_list	ft_list_init(void);

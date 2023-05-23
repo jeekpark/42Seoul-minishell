@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/22 23:14:19 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 14:55:28 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static int	ft_find_cmd(t_exec *exec, t_exec_info *exec_info)
 	size_t	i;
 	char	*cmd_path;
 
-	if (access(exec_info->cmd_path, X_OK) == SUCCESS)
+	if (exec_info->cmd_path == NULL
+		|| access(exec_info->cmd_path, X_OK) == SUCCESS)
 		return (SUCCESS);
 	i = 0;
 	while (exec->path_envp[i])
@@ -63,6 +64,10 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 	}
 	else
 	{
-		execve(exec_info->cmd_path, exec_info->cmd, info->envp); // test
+		ft_pipe(exec, exec_info);
+		ft_redirect(exec_info);
+		if (exec_info->cmd_path == NULL)
+			exit (EXIT_SUCCESS);
+		execve(exec_info->cmd_path, exec_info->cmd, info->envp);
 	}
 }
