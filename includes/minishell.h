@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/23 14:42:19 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/23 17:04:42 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define IN 0
 # define OUT 1
 # define NONE -1
+
+/* Global Variable */
+extern unsigned char	g_child_exit_code;
 
 /* List */
 typedef struct s_node
@@ -130,7 +133,6 @@ typedef struct s_exec
 	t_exec_info	*exec_arr;
 	size_t		exec_arr_size;
 	size_t		exec_arr_i;
-	int			child_exit_code;
 	int			prev_pipe_fd;
 	char		**path_envp;
 }	t_exec;
