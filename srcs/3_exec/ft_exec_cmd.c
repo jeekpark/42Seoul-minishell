@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 14:21:39 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 14:58:05 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,30 @@ static void	ft_set_fd(t_exec *exec, t_exec_info *exec_info)
 	}
 }
 
+static char	**ft_make_envp(t_list *mini_envp)
+{
+	char	**envp;
+	size_t	count;
+	t_node	*node;
+
+	count = 0;
+	node = mini_envp->front_node;
+	while (node->next_node != NULL)
+	{
+		count++;
+		node = node->next_node;
+	}
+	envp = (char **)ft_calloc(count + 1, sizeof(char *));
+	count = 0;
+	node = mini_envp->front_node;
+	while (node->next_node != NULL)
+	{
+		envp[count] = (char *)node->content;
+		node = node->next_node;
+	}
+	return (envp);
+}
+
 void	ft_exec_cmd(t_info *info, t_parse *parse,
 	t_exec *exec, t_exec_info *exec_info)
 {
@@ -93,6 +117,7 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 		if (ft_is_builtin(exec_info) == TRUE)
 			ft_exec_builtin(info, parse, exec, exec_info);
 		else
-			execve(exec_info->cmd_path, exec_info->cmd, info->envp);
+			execve(exec_info->cmd_path, exec_info->cmd,
+				ft_make_envp(&info->mini_envp));
 	}
 }
