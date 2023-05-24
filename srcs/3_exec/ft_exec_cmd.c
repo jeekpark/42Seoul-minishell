@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 11:21:55 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 14:21:39 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,26 @@ static int	ft_find_cmd(t_exec *exec, t_exec_info *exec_info)
 	return (FAILURE);
 }
 
+static void	ft_set_fd(t_exec *exec, t_exec_info *exec_info)
+{
+	ft_set_pipe_fd(exec, exec_info);
+	ft_set_redirect_fd(exec_info);
+	if (exec_info->infile_fd != NONE)
+	{
+		if (dup2(exec_info->infile_fd, STDIN_FILENO) == FAILURE)
+			exit (ft_perror(errno));
+		if (close(exec_info->infile_fd) == FAILURE)
+			exit (ft_perror(errno));
+	}
+	if (exec_info->outfile_fd != NONE)
+	{
+		if (dup2(exec_info->outfile_fd, STDOUT_FILENO) == FAILURE)
+			exit (ft_perror(errno));
+		if (close(exec_info->outfile_fd) == FAILURE)
+			exit (ft_perror(errno));
+	}
+}
+
 void	ft_exec_cmd(t_info *info, t_parse *parse,
 	t_exec *exec, t_exec_info *exec_info)
 {
@@ -67,8 +87,7 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 	}
 	else
 	{
-		ft_redirect(exec_info);
-		ft_pipe(exec, exec_info);
+		ft_set_fd(exec, exec_info);
 		if (exec_info->cmd_path == NULL)
 			exit (EXIT_SUCCESS);
 		if (ft_is_builtin(exec_info) == TRUE)

@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 08:00:20 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 14:26:05 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,9 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 			t_exec *exec, t_exec_info *exec_info);
 void	ft_exec_builtin(t_info *info, t_parse *parse,
 			t_exec *exec, t_exec_info *exec_info);
-void	ft_redirect(t_exec_info *exec_info);
-void	ft_redirect_here_doc(t_exec_info *exec_info, t_redirect *redirect);
-void	ft_pipe(t_exec *exec, t_exec_info *exec_info);
+int		ft_check_here_doc(t_exec *exec);
+void	ft_set_redirect_fd(t_exec_info *exec_info);
+void	ft_set_pipe_fd(t_exec *exec, t_exec_info *exec_info);
 
 /* 4_builtin */
 int		ft_echo_builtin(void);

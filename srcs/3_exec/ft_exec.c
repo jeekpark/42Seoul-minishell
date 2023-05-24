@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:21:28 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/23 17:06:02 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 14:25:21 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ int	ft_exec(t_info *info, t_parse *parse, t_exec *exec)
 {
 	t_exec_info	*exec_info;
 
+	if (ft_check_here_doc(exec) == FAILURE)
+	{
+		ft_free_all(parse, exec);
+		return (FAILURE);
+	}
+	exec->exec_arr_i = 0;
 	while (exec->exec_arr_i < exec->exec_arr_size)
 	{
 		exec_info = &exec->exec_arr[exec->exec_arr_i];

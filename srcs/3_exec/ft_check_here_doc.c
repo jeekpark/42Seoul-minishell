@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_redirect_here_doc.c                             :+:      :+:    :+:   */
+/*   ft_check_here_doc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 12:07:24 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 10:16:50 by tnam             ###   ########.fr       */
+/*   Created: 2023/05/24 13:58:51 by tnam              #+#    #+#             */
+/*   Updated: 2023/05/24 14:28:06 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_here_doc_get_input(t_redirect *redirect)
+static int	ft_get_here_doc(t_redirect *redirect)
 {
 	char	*input;
 	char	*limiter;
@@ -20,10 +20,10 @@ static void	ft_here_doc_get_input(t_redirect *redirect)
 
 	temp_fd = open("/tmp/whine", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	if (temp_fd == FAILURE)
-		exit (ft_perror(errno));
+		return (ft_perror(FAILURE));
 	limiter = ft_strjoin(redirect->value, "\n");
 	if (limiter == NULL)
-		exit (ft_error("limiter malloc failed.", 1));
+		return (ft_error("limiter malloc failed.", FAILURE));
 	while (TRUE)
 	{
 		write(1, "> ", 2);
@@ -36,16 +36,29 @@ static void	ft_here_doc_get_input(t_redirect *redirect)
 	free(input);
 	free(limiter);
 	if (close(temp_fd) == FAILURE)
-		exit(ft_perror(errno));
+		return (ft_perror(FAILURE));
+	return (SUCCESS);
 }
 
-void	ft_redirect_here_doc(t_exec_info *exec_info, t_redirect *redirect)
+int	ft_check_here_doc(t_exec *exec)
 {
-	ft_here_doc_get_input(redirect);
-	if (exec_info->infile_fd != NONE)
-		if (close(exec_info->infile_fd) == FAILURE)
-			exit (ft_perror(errno));
-	exec_info->infile_fd = open("/tmp/whine", O_RDONLY);
-	if (exec_info->infile_fd == FAILURE)
-		exit (ft_perror(errno));
+	t_exec_info	*exec_info;
+	t_redirect	*redirect;
+
+	exec->exec_arr_i = 0;
+	while (exec->exec_arr_i < exec->exec_arr_size)
+	{
+		exec_info = &exec->exec_arr[exec->exec_arr_i];
+		exec_info->redirect_i = 0;
+		while (exec_info->redirect[exec_info->redirect_i].value != 0)
+		{
+			redirect = &exec_info->redirect[exec_info->redirect_i];
+			if (redirect->type == HERE_DOC)
+				if (ft_get_here_doc(redirect) == FAILURE)
+					return (FAILURE);
+			exec_info->redirect_i++;
+		}
+		exec->exec_arr_i++;
+	}
+	return (SUCCESS);
 }

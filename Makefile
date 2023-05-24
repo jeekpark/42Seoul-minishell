@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/05/24 08:01:02 by tnam             ###   ########.fr        #
+#    Updated: 2023/05/24 14:27:10 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +58,9 @@ SRCS			=	srcs/main.c							\
 					srcs/3_exec/ft_exec.c				\
 					srcs/3_exec/ft_exec_cmd.c			\
 					srcs/3_exec/ft_exec_builtin.c		\
-					srcs/3_exec/ft_redirect.c			\
-					srcs/3_exec/ft_redirect_here_doc.c	\
-					srcs/3_exec/ft_pipe.c				\
+					srcs/3_exec/ft_set_redirect_fd.c	\
+					srcs/3_exec/ft_set_pipe_fd.c		\
+					srcs/3_exec/ft_check_here_doc.c		\
 					srcs/4_builtin/ft_echo_builtin.c	\
 					srcs/4_builtin/ft_cd_builtin.c		\
 					srcs/4_builtin/ft_env_builtin.c		\
