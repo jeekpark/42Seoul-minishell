@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:26:44 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 14:39:45 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 19:55:32 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,42 @@ static void	ft_redirect_out1(t_exec_info *exec_info, t_redirect *redirect)
 {
 	if (exec_info->outfile_fd != NONE)
 		if (close(exec_info->outfile_fd) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 	exec_info->outfile_fd = open(redirect->value, O_WRONLY
 			| O_CREAT | O_TRUNC, 0644);
 	if (exec_info->outfile_fd == FAILURE)
-		exit (ft_perror(1));
+		exit(ft_perror(1));
 }
 
 static void	ft_redirect_out2(t_exec_info *exec_info, t_redirect *redirect)
 {
 	if (exec_info->outfile_fd != NONE)
 		if (close(exec_info->outfile_fd) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 	exec_info->outfile_fd = open(redirect->value, O_WRONLY
 			| O_CREAT | O_APPEND, 0644);
 	if (exec_info->outfile_fd == FAILURE)
-		exit (ft_perror(1));
+		exit(ft_perror(1));
 }
 
 static void	ft_redirect_in1(t_exec_info *exec_info, t_redirect *redirect)
 {
 	if (exec_info->infile_fd != NONE)
 		if (close(exec_info->infile_fd) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 	exec_info->infile_fd = open(redirect->value, O_RDONLY);
 	if (exec_info->infile_fd == FAILURE)
-		exit (ft_perror(1));
+		exit(ft_perror(1));
 }
 
 static void	ft_redirect_here_doc(t_exec_info *exec_info)
 {
 	if (exec_info->infile_fd != NONE)
 		if (close(exec_info->infile_fd) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 	exec_info->infile_fd = open("/tmp/whine", O_RDONLY);
 	if (exec_info->infile_fd == FAILURE)
-		exit (ft_perror(1));
+		exit(ft_perror(1));
 }
 
 void	ft_set_redirect_fd(t_exec_info *exec_info)

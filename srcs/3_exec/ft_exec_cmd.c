@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 14:58:05 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 20:06:55 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ static void	ft_set_fd(t_exec *exec, t_exec_info *exec_info)
 	if (exec_info->infile_fd != NONE)
 	{
 		if (dup2(exec_info->infile_fd, STDIN_FILENO) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 		if (close(exec_info->infile_fd) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 	}
 	if (exec_info->outfile_fd != NONE)
 	{
 		if (dup2(exec_info->outfile_fd, STDOUT_FILENO) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 		if (close(exec_info->outfile_fd) == FAILURE)
-			exit (ft_perror(errno));
+			exit(ft_perror(errno));
 	}
 }
 
@@ -102,6 +102,7 @@ static char	**ft_make_envp(t_list *mini_envp)
 void	ft_exec_cmd(t_info *info, t_parse *parse,
 	t_exec *exec, t_exec_info *exec_info)
 {
+	signal(SIGQUIT, SIG_DFL);
 	if (ft_is_builtin(exec_info) == FALSE
 		&& ft_find_cmd(exec, exec_info) == FAILURE)
 	{
@@ -113,7 +114,7 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 	{
 		ft_set_fd(exec, exec_info);
 		if (exec_info->cmd_path == NULL)
-			exit (EXIT_SUCCESS);
+			exit(EXIT_SUCCESS);
 		if (ft_is_builtin(exec_info) == TRUE)
 			ft_exec_builtin(info, parse, exec, exec_info);
 		else

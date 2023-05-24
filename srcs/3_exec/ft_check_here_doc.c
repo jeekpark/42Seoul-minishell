@@ -6,13 +6,13 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:58:51 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 14:28:06 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 19:55:32 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_get_here_doc(t_redirect *redirect)
+static void	ft_get_here_doc(t_redirect *redirect)
 {
 	char	*input;
 	char	*limiter;
@@ -20,10 +20,10 @@ static int	ft_get_here_doc(t_redirect *redirect)
 
 	temp_fd = open("/tmp/whine", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	if (temp_fd == FAILURE)
-		return (ft_perror(FAILURE));
+		exit(ft_perror(errno));
 	limiter = ft_strjoin(redirect->value, "\n");
 	if (limiter == NULL)
-		return (ft_error("limiter malloc failed.", FAILURE));
+		exit(ft_error("limiter malloc failed.", FAILURE));
 	while (TRUE)
 	{
 		write(1, "> ", 2);
@@ -36,15 +36,15 @@ static int	ft_get_here_doc(t_redirect *redirect)
 	free(input);
 	free(limiter);
 	if (close(temp_fd) == FAILURE)
-		return (ft_perror(FAILURE));
-	return (SUCCESS);
+		exit(ft_perror(errno));
 }
 
-int	ft_check_here_doc(t_exec *exec)
+static void	ft_search_here_doc(t_exec *exec)
 {
 	t_exec_info	*exec_info;
 	t_redirect	*redirect;
 
+	signal(SIGINT, ft_sig_for_here_doc_child);
 	exec->exec_arr_i = 0;
 	while (exec->exec_arr_i < exec->exec_arr_size)
 	{
@@ -54,11 +54,29 @@ int	ft_check_here_doc(t_exec *exec)
 		{
 			redirect = &exec_info->redirect[exec_info->redirect_i];
 			if (redirect->type == HERE_DOC)
-				if (ft_get_here_doc(redirect) == FAILURE)
-					return (FAILURE);
+				ft_get_here_doc(redirect);
 			exec_info->redirect_i++;
 		}
 		exec->exec_arr_i++;
 	}
+	exit(EXIT_SUCCESS);
+}
+
+int	ft_check_here_doc(t_exec *exec)
+{
+	pid_t	here_doc_pid;
+	int		child_status;
+
+	here_doc_pid = fork();
+	if (here_doc_pid == FAILURE)
+		return (FAILURE);
+	else if (here_doc_pid == CHILD)
+		ft_search_here_doc(exec);
+	signal(SIGINT, ft_sig_for_here_doc_parent);
+	if (waitpid(-1, &child_status, 0) == FAILURE)
+		return (ft_perror(FAILURE));
+	g_child_exit_code = WEXITSTATUS(child_status);
+	if (g_child_exit_code != EXIT_SUCCESS)
+		return (FAILURE);
 	return (SUCCESS);
 }

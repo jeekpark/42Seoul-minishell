@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 15:03:21 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 16:14:53 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_init(argc, argv, envp, &info);
 	while (TRUE)
 	{
+		ft_sig_init();
 		parse.line = readline("whine 🍷 ");
 		if (parse.line == NULL)
 		{

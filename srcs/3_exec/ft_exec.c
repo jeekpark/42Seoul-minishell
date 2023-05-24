@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:21:28 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 14:25:21 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 20:11:28 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_parent(t_exec *exec, t_exec_info *exec_info)
 {
+	signal(SIGINT, SIG_IGN);
 	if (exec->prev_pipe_fd != NONE)
 	{
 		if (close(exec->prev_pipe_fd) == FAILURE)
@@ -63,7 +64,10 @@ static int	ft_wait_child(t_exec *exec)
 			return (ft_perror(FAILURE));
 		exec->exec_arr_i++;
 	}
-	g_child_exit_code = WEXITSTATUS(child_status);
+	if (WIFSIGNALED(child_status) == TRUE)
+		g_child_exit_code = 128 + WTERMSIG(child_status);
+	else
+		g_child_exit_code = WEXITSTATUS(child_status);
 	unlink("/tmp/whine");
 	return (SUCCESS);
 }

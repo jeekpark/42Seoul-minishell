@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 15:07:16 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 20:01:27 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,9 @@ typedef struct s_exec
 /* 0_init */
 void	ft_init(int argc, char **argv, char **envp, t_info *info);
 void	ft_sig_init(void);
+void	ft_sig_for_here_doc_parent(int sig);
+void	ft_sig_for_here_doc_child(int sig);
+void	ft_sig_for_child(int sig);
 void	ft_mini_envp_init(char **envp, t_info *info);
 
 /* 1_parse */
