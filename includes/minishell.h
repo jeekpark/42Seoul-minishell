@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 20:01:27 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 22:05:06 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_exec
 	size_t		exec_arr_i;
 	int			prev_pipe_fd;
 	char		**path_envp;
+	pid_t		current_child_pid;
 }	t_exec;
 
 /* 0_init */
@@ -145,6 +146,7 @@ void	ft_sig_for_here_doc_parent(int sig);
 void	ft_sig_for_here_doc_child(int sig);
 void	ft_sig_for_child(int sig);
 void	ft_mini_envp_init(char **envp, t_info *info);
+int		ft_init_exec(t_info *info, t_parse *parse, t_exec *exec);
 
 /* 1_parse */
 int		ft_parse(t_info *info, t_parse *parse);

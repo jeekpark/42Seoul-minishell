@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 14:24:48 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 08:14:42 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 22:04:39 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,6 @@ static void	ft_get_exec_arr_size(t_parse *parse, t_exec *exec)
 			exec->exec_arr_size++;
 		token_index++;
 	}
-}
-
-static int	ft_init_exec(t_info *info, t_parse *parse, t_exec *exec)
-{
-	size_t	i;
-	char	*path;
-
-	i = 0;
-	while (ft_strncmp(info->envp[i], "PATH=", 5) != 0)
-		i++;
-	path = info->envp[i] + 5;
-	exec->path_envp = ft_split(path, ':');
-	if (exec->path_envp == NULL)
-	{
-		ft_free_tokens(parse, parse->token_count);
-		return (ft_error("exec->path_envp split failed.", FAILURE));
-	}
-	exec->exec_arr_i = 0;
-	exec->prev_pipe_fd = NONE;
-	exec->exec_arr
-		= (t_exec_info *)malloc(sizeof(t_exec_info) * exec->exec_arr_size);
-	if (exec->exec_arr == NULL)
-	{
-		ft_free_tokens(parse, parse->token_count);
-		return (ft_error("exec_arr malloc failed.", FAILURE));
-	}
-	return (SUCCESS);
 }
 
 static void	ft_init_exec_info(t_exec_info *exec_info)

@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/05/24 14:27:10 by tnam             ###   ########.fr        #
+#    Updated: 2023/05/24 22:06:23 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS			=	srcs/main.c							\
 					srcs/0_init/ft_init.c				\
 					srcs/0_init/ft_sig_init.c			\
 					srcs/0_init/ft_mini_envp_init.c		\
+					srcs/0_init/ft_init_exec.c			\
 					srcs/1_parsing/ft_parse.c			\
 					srcs/1_parsing/ft_count_token.c		\
 					srcs/1_parsing/ft_tokenization.c	\
