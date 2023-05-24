@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:07:24 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 08:18:05 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/24 10:16:50 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ static void	ft_here_doc_get_input(t_redirect *redirect)
 	limiter = ft_strjoin(redirect->value, "\n");
 	if (limiter == NULL)
 		exit (ft_error("limiter malloc failed.", 1));
-	write(1, "\0", 1);
 	while (TRUE)
 	{
-		write(1, "> ", 3);
+		write(1, "> ", 2);
 		input = get_next_line(STDIN_FILENO);
 		if (!input || ft_strncmp(input, limiter, ft_strlen(limiter)) == 0)
 			break ;
