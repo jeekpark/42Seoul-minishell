@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/24 22:05:06 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/25 13:24:47 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,20 +166,21 @@ int		ft_set_exec_info(t_parse *parse, t_exec_info *exec_info);
 int		ft_exec(t_info *info, t_parse *parse, t_exec *exec);
 void	ft_exec_cmd(t_info *info, t_parse *parse,
 			t_exec *exec, t_exec_info *exec_info);
-void	ft_exec_builtin(t_info *info, t_parse *parse,
+int		ft_exec_builtin_parent(t_info *info, t_parse *parse,
 			t_exec *exec, t_exec_info *exec_info);
+void	ft_exec_builtin_child(t_info *info, t_exec_info *exec_info);
 int		ft_check_here_doc(t_exec *exec);
 void	ft_set_redirect_fd(t_exec_info *exec_info);
 void	ft_set_pipe_fd(t_exec *exec, t_exec_info *exec_info);
 
 /* 4_builtin */
 int		ft_echo_builtin(void);
-int		ft_cd_builtin(void);
+void	ft_cd_builtin(void);
 int		ft_env_builtin(t_info *info);
-int		ft_exit_builtin(t_list *mini_envp, t_parse *parse, t_exec *exec);
-int		ft_export_builtin(t_info *info, t_exec_info *exec_info);
+void	ft_exit_builtin(t_list *mini_envp, t_parse *parse, t_exec *exec);
+void	ft_export_builtin(t_info *info, t_exec_info *exec_info);
 int		ft_pwd_builtin(void);
-int		ft_unset_builtin(t_info *info, t_exec_info *exec_info);
+void	ft_unset_builtin(t_info *info, t_exec_info *exec_info);
 
 /* ft_list */
 t_list	ft_list_init(void);
@@ -197,7 +198,8 @@ int		ft_is_quote(char c);
 int		ft_is_env(t_info *info, t_parse *parse);
 int		ft_is_heredoc(char c1, char c2);
 int		ft_is_child_exit_code(t_parse *parse);
-int		ft_is_builtin(t_exec_info *exec_info);
+int		ft_is_builtin_parent(t_exec_info *exec_info);
+int		ft_is_builtin_child(t_exec_info *exec_info);
 void	ft_free_tokens(t_parse *parse, size_t token_size);
 void	ft_free_exec(t_exec *exec, size_t exec_info_size);
 void	ft_free_all(t_parse *parse, t_exec *exec);
