@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:14 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/25 13:15:24 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/25 13:37:28 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_parse		parse;
 	t_exec		exec;
 
-	atexit(leaks); // memory leaks test
+	//atexit(leaks); // memory leaks test
 	ft_init(argc, argv, envp, &info);
 	while (TRUE)
 	{
