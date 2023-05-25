@@ -6,15 +6,17 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:21:28 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/25 13:37:11 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/25 20:31:13 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_parent(t_exec *exec, t_exec_info *exec_info)
+static int	ft_parent(t_info *info, t_exec *exec, t_exec_info *exec_info)
 {
-	signal(SIGINT, SIG_IGN);
+	(void)info;
+	signal(SIGINT, ft_sig_for_parent);
+	signal(SIGQUIT, ft_sig_for_parent);
 	if (exec->prev_pipe_fd != NONE)
 	{
 		if (close(exec->prev_pipe_fd) == FAILURE)
@@ -44,7 +46,7 @@ static int	ft_make_child(t_info *info, t_parse *parse,
 		ft_exec_cmd(info, parse, exec, exec_info);
 	else
 	{
-		if (ft_parent(exec, exec_info) == FAILURE)
+		if (ft_parent(info, exec, exec_info) == FAILURE)
 		{
 			ft_free_all(parse, exec);
 			return (FAILURE);

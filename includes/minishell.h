@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/25 17:19:47 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/25 20:18:49 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_info
 	char			**argv;
 	char			**envp;
 	t_list			mini_envp;
+	struct termios	termios_backup;
+	struct termios	termios;
 }	t_info;
 
 typedef struct s_parse
@@ -141,10 +143,10 @@ typedef struct s_exec
 
 /* 0_init */
 void	ft_init(int argc, char **argv, char **envp, t_info *info);
-void	ft_sig_init(void);
+void	ft_sig_init(t_info *info);
 void	ft_sig_for_here_doc_parent(int sig);
 void	ft_sig_for_here_doc_child(int sig);
-void	ft_sig_for_child(int sig);
+void	ft_sig_for_parent(int sig);
 void	ft_mini_envp_init(char **envp, t_info *info);
 int		ft_init_exec(t_info *info, t_parse *parse, t_exec *exec);
 
