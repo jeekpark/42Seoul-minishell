@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/25 20:18:49 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/26 10:57:37 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	ft_set_pipe_fd(t_exec *exec, t_exec_info *exec_info);
 
 /* 4_builtin */
 int		ft_echo_builtin(t_exec_info *exec_info);
-int		ft_cd_builtin(void);
+int		ft_cd_builtin(t_exec_info *exec_info);
 int		ft_env_builtin(t_info *info);
 int		ft_exit_builtin(t_list *mini_envp, t_parse *parse, t_exec *exec);
 int		ft_export_builtin(t_info *info, t_exec_info *exec_info);
