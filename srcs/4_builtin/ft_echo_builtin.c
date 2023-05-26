@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:39:21 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/25 17:35:11 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/26 13:55:05 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ static void	ft_echo_builtin_print_str(char **str, int n_flag)
 		printf("%s ", str[i]);
 		i++;
 	}
-	if (n_flag == FALSE)
+	if (n_flag == TRUE)
+		printf("\b");
+	else if (n_flag == FALSE)
 		printf("\n");
 }
 
