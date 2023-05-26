@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeekpark <jeekpark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:49:54 by jeekpark          #+#    #+#             */
-/*   Updated: 2023/05/25 16:16:56 by jeekpark         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:07:33 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static int	ft_exit_builtin_isnum(t_exec *exec)
 			i++;
 		else
 		{
-			ft_printf_err("exit: %s: numeric argument required\n",
+			ft_printf_err("exit\nexit: %s: numeric argument required\n",
 				exec->exec_arr[exec->exec_arr_i].cmd[1]);
-			return (FAILURE);
+			exit(255);
 		}
 	}
 	if (i == 1)
 	{
-		ft_printf_err("exit: %s: numeric argument required\n",
+		ft_printf_err("exit\nexit: %s: numeric argument required\n",
 			exec->exec_arr[exec->exec_arr_i].cmd[1]);
-		return (FAILURE);
+		exit(255);
 	}
 	return (SUCCESS);
 }
