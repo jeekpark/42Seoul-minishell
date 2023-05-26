@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:49:54 by jeekpark          #+#    #+#             */
-/*   Updated: 2023/05/26 14:07:33 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/26 14:32:29 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,8 @@ static int	ft_isnum(int c)
 		return (0);
 }
 
-static int	ft_exit_builtin_isnum(t_exec *exec)
+static void	ft_exit_builtin_arg_check(t_exec *exec, size_t i, int sign_flag)
 {
-	size_t	i;
-
-	i = 0;
-	if ((exec->exec_arr[exec->exec_arr_i].cmd[1][0] == '-')
-		|| (exec->exec_arr[exec->exec_arr_i].cmd[1][0] == '+'))
-		i++;
 	while (exec->exec_arr[exec->exec_arr_i].cmd[1][i])
 	{
 		if (ft_isnum(exec->exec_arr[exec->exec_arr_i].cmd[1][i]))
@@ -39,12 +33,28 @@ static int	ft_exit_builtin_isnum(t_exec *exec)
 			exit(255);
 		}
 	}
-	if (i == 1)
+	if (i == 1 && sign_flag == TRUE)
 	{
 		ft_printf_err("exit\nexit: %s: numeric argument required\n",
 			exec->exec_arr[exec->exec_arr_i].cmd[1]);
 		exit(255);
 	}
+}
+
+static int	ft_exit_builtin_isnum(t_exec *exec)
+{
+	size_t	i;
+	int		sign_flag;
+
+	sign_flag = FALSE;
+	i = 0;
+	if ((exec->exec_arr[exec->exec_arr_i].cmd[1][0] == '-')
+		|| (exec->exec_arr[exec->exec_arr_i].cmd[1][0] == '+'))
+	{
+		sign_flag = TRUE;
+		i++;
+	}
+	ft_exit_builtin_arg_check(exec, i, sign_flag);
 	return (SUCCESS);
 }
 
@@ -69,5 +79,6 @@ int	ft_exit_builtin(t_list *mini_envp, t_parse *parse, t_exec *exec)
 	exit_value = ft_atoi(exec->exec_arr[exec->exec_arr_i].cmd[1]);
 	ft_list_clear(mini_envp);
 	ft_free_all(parse, exec);
+	printf("exit\n");
 	exit(exit_value);
 }
