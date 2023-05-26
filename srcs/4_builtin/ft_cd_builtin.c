@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:39:21 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/26 11:06:21 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/26 13:06:10 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_cd_builtin(t_exec_info *exec_info)
 	char	*path;
 
 	path = exec_info->cmd[1];
+	if (path == NULL)
+		return (SUCCESS);
 	if (chdir(path) == FAILURE)
 		return (ft_perror(FAILURE));
 	return (SUCCESS);
