@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:30:42 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/29 15:38:41 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/29 17:57:16 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void	ft_list_clear(t_list *list);
 /* utils */
 int		ft_error(char *msg, int error_code);
 int		ft_perror(int error_code);
-int		ft_cmd_path_check(char *cmd_path);
+void	ft_cmd_is_directory(char *cmd_path);
 int		ft_is_space(char c);
 int		ft_is_operator(char c);
 int		ft_is_redirect(char c);

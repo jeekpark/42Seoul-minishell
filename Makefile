@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/05/29 15:38:55 by tnam             ###   ########.fr        #
+#    Updated: 2023/05/29 17:57:01 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT_C			=	-L$(LIBFT_DIR) -lft
 SRCS			=	srcs/main.c							\
 					srcs/utils/ft_error.c				\
 					srcs/utils/ft_perror.c				\
-					srcs/utils/ft_cmd_path_check.c		\
+					srcs/utils/ft_cmd_is_directory.c	\
 					srcs/utils/ft_is_space.c			\
 					srcs/utils/ft_is_operator.c			\
 					srcs/utils/ft_is_redirect.c			\

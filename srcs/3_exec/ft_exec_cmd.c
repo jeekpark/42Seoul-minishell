@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/29 15:39:33 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/29 18:24:17 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ static int	ft_find_cmd(t_exec *exec, t_exec_info *exec_info)
 	size_t	i;
 	char	*cmd_path;
 
-	if (ft_cmd_path_check(exec_info->cmd_path) == FAILURE)
+	cmd_path = exec_info->cmd_path;
+	ft_cmd_is_directory(cmd_path);
+	if (cmd_path == NULL || access(cmd_path, X_OK) == SUCCESS)
+		return (SUCCESS);
+	if (cmd_path[0] == '\0')
 		return (FAILURE);
 	i = 0;
 	while (exec->path_envp[i])
@@ -87,7 +91,7 @@ static char	**ft_make_envp(t_list *mini_envp)
 	}
 	envp = (char **)malloc(sizeof(char *) * (count + 1));
 	if (envp == NULL)
-		exit(ft_error("envp malloc failed.\n", EXIT_FAILURE));
+		exit(ft_error("envp malloc failed\n", EXIT_FAILURE));
 	count = 0;
 	node = mini_envp->front_node;
 	while (node != NULL)

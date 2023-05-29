@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:28:40 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/26 15:11:01 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/29 18:23:45 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_pipe_process(t_parse *parse)
 	if (parse->line[parse->line_i + 1] == '|')
 	{
 		g_child_exit_code = 258;
-		return (ft_error("Syntax Error: Not support '||' symbol in minishell.",
+		return (ft_error("Syntax Error: Not support '||' symbol in minishell",
 				FAILURE));
 	}
 	else
@@ -39,7 +39,7 @@ static int	ft_redirect_process(t_parse *parse)
 		{
 			g_child_exit_code = 258;
 			return (ft_error("Syntax Error: Used \
-more than 3 redirection character. (Ex: '<<<...')", FAILURE));
+more than 3 redirection character (Ex: '<<<...')", FAILURE));
 		}
 		parse->line_i++;
 	}
@@ -72,7 +72,7 @@ static int	ft_quote_process(t_parse *parse)
 	if (parse->line[parse->line_i] == '\0')
 	{
 		g_child_exit_code = 258;
-		ft_printf_err("Syntax Error: Quote %c is not closed.\n", end_quote);
+		ft_printf_err("Syntax Error: Quote %c is not closed\n", end_quote);
 		return (FAILURE);
 	}
 	return (SUCCESS);
