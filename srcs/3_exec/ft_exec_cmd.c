@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/29 15:04:39 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/29 15:39:33 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ static int	ft_find_cmd(t_exec *exec, t_exec_info *exec_info)
 	size_t	i;
 	char	*cmd_path;
 
-	if (exec_info->cmd_path == NULL
-		|| access(exec_info->cmd_path, X_OK) == SUCCESS)
-		return (SUCCESS);
-	if (exec_info->cmd_path[0] == '\0')
+	if (ft_cmd_path_check(exec_info->cmd_path) == FAILURE)
 		return (FAILURE);
 	i = 0;
 	while (exec->path_envp[i])
