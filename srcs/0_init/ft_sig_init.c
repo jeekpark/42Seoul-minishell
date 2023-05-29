@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 16:23:33 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/25 20:19:40 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/29 15:26:06 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_signal_2(int sig)
 {
 	(void)sig;
+	g_child_exit_code = 1;
 	printf("\n");
 	if (rl_on_new_line() == -1)
 		exit(1);
