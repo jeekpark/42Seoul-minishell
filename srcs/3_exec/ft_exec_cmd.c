@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/26 12:53:23 by tnam             ###   ########.fr       */
+/*   Updated: 2023/05/29 15:04:39 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ static char	**ft_make_envp(t_list *mini_envp)
 		count++;
 		node = node->next_node;
 	}
-	envp = (char **)ft_calloc(count + 1, sizeof(char *));
+	envp = (char **)malloc(sizeof(char *) * (count + 1));
+	if (envp == NULL)
+		exit(ft_error("envp malloc failed.\n", EXIT_FAILURE));
 	count = 0;
 	node = mini_envp->front_node;
 	while (node != NULL)
@@ -97,6 +99,7 @@ static char	**ft_make_envp(t_list *mini_envp)
 		node = node->next_node;
 		count++;
 	}
+	envp[count] = NULL;
 	return (envp);
 }
 
