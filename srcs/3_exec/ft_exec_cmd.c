@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:18:43 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/29 18:24:17 by tnam             ###   ########.fr       */
+/*   Updated: 2023/06/02 08:51:12 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	if (ft_is_builtin_child(exec_info) == FALSE
+	if (ft_is_builtin(exec_info) == FALSE
 		&& ft_find_cmd(exec, exec_info) == FAILURE)
 	{
 		ft_printf_err("%s: command not found\n", exec_info->cmd[0]);
@@ -121,8 +121,8 @@ void	ft_exec_cmd(t_info *info, t_parse *parse,
 		ft_set_fd(exec, exec_info);
 		if (exec_info->cmd_path == NULL)
 			exit(EXIT_SUCCESS);
-		if (ft_is_builtin_child(exec_info) == TRUE)
-			ft_exec_builtin_child(info, exec_info);
+		if (ft_is_builtin(exec_info) == TRUE)
+			ft_exec_builtin(info, parse, exec, exec_info);
 		else
 			execve(exec_info->cmd_path, exec_info->cmd,
 				ft_make_envp(&info->mini_envp));

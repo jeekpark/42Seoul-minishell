@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:49:54 by jeekpark          #+#    #+#             */
-/*   Updated: 2023/05/26 14:32:29 by tnam             ###   ########.fr       */
+/*   Updated: 2023/06/02 09:02:35 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	ft_isnum(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (1);
+		return (TRUE);
 	else
-		return (0);
+		return (FALSE);
 }
 
 static void	ft_exit_builtin_arg_check(t_exec *exec, size_t i, int sign_flag)
@@ -66,7 +66,7 @@ int	ft_exit_builtin(t_list *mini_envp, t_parse *parse, t_exec *exec)
 	{
 		ft_list_clear(mini_envp);
 		ft_free_all(parse, exec);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	if (exec->exec_arr[exec->exec_arr_i].cmd[2])
 	{

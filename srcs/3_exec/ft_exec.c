@@ -6,15 +6,14 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:21:28 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/26 12:37:13 by tnam             ###   ########.fr       */
+/*   Updated: 2023/06/02 08:45:33 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_parent(t_info *info, t_exec *exec, t_exec_info *exec_info)
+static int	ft_parent(t_exec *exec, t_exec_info *exec_info)
 {
-	(void)info;
 	signal(SIGINT, ft_sig_for_parent);
 	signal(SIGQUIT, ft_sig_for_parent);
 	if (exec->prev_pipe_fd != NONE)
@@ -46,7 +45,7 @@ static int	ft_make_child(t_info *info, t_parse *parse,
 		ft_exec_cmd(info, parse, exec, exec_info);
 	else
 	{
-		if (ft_parent(info, exec, exec_info) == FAILURE)
+		if (ft_parent(exec, exec_info) == FAILURE)
 		{
 			ft_free_all(parse, exec);
 			return (FAILURE);
@@ -100,8 +99,8 @@ int	ft_exec(t_info *info, t_parse *parse, t_exec *exec)
 	while (exec->exec_arr_i < exec->exec_arr_size)
 	{
 		exec_info = &exec->exec_arr[exec->exec_arr_i];
-		if (ft_is_builtin_parent(exec_info) == TRUE)
-			return (ft_exec_builtin_parent(info, parse, exec, exec_info));
+		// if (ft_is_builtin_parent(exec_info) == TRUE)
+		// 	return (ft_exec_builtin_parent(info, parse, exec, exec_info));
 		if (exec_info->use_pipe == TRUE)
 		{
 			if (pipe(exec_info->pipe_fd) == FAILURE)

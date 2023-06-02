@@ -6,7 +6,7 @@
 /*   By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:39:21 by tnam              #+#    #+#             */
-/*   Updated: 2023/05/29 11:22:39 by tnam             ###   ########.fr       */
+/*   Updated: 2023/06/02 08:58:20 by tnam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,13 @@ static void	ft_echo_builtin_print_str(char **str, int n_flag)
 	size_t	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i + 1])
 	{
 		printf("%s ", str[i]);
 		i++;
 	}
-	if (n_flag == TRUE)
-		printf("\b");
-	else if (n_flag == FALSE)
+	printf("%s", str[i]);
+	if (n_flag == FALSE)
 		printf("\n");
 }
 
@@ -83,7 +82,7 @@ int	ft_echo_builtin(t_exec_info *exec_info)
 	if (exec_info->cmd[1] == NULL)
 	{
 		printf("\n");
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	str = ft_echo_builtin_malloc_str(exec_info);
 	n_flag = FALSE;

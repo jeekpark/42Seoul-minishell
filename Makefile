@@ -6,7 +6,7 @@
 #    By: tnam <tnam@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 17:24:05 by tnam              #+#    #+#              #
-#    Updated: 2023/05/29 17:57:01 by tnam             ###   ########.fr        #
+#    Updated: 2023/06/02 08:44:49 by tnam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ SRCS			=	srcs/main.c							\
 					srcs/utils/ft_is_env.c				\
 					srcs/utils/ft_is_heredoc.c			\
 					srcs/utils/ft_is_child_exit_code.c	\
-					srcs/utils/ft_is_builtin_parent.c	\
-					srcs/utils/ft_is_builtin_child.c	\
+					srcs/utils/ft_is_builtin.c			\
 					srcs/utils/ft_free_tokens.c			\
 					srcs/utils/ft_free_exec.c			\
 					srcs/utils/ft_free_all.c			\
@@ -60,8 +59,7 @@ SRCS			=	srcs/main.c							\
 					srcs/2_make_exec_info/ft_set_exec_info.c	\
 					srcs/3_exec/ft_exec.c				\
 					srcs/3_exec/ft_exec_cmd.c			\
-					srcs/3_exec/ft_exec_builtin_parent.c	\
-					srcs/3_exec/ft_exec_builtin_child.c		\
+					srcs/3_exec/ft_exec_builtin.c		\
 					srcs/3_exec/ft_set_redirect_fd.c	\
 					srcs/3_exec/ft_set_pipe_fd.c		\
 					srcs/3_exec/ft_check_here_doc.c		\
